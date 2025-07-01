@@ -19,6 +19,7 @@
     - 投稿時刻
     - インプレッション数(pending機能)
   - 投稿に対するアクションはなるべく本家Xに近いことができる
+    - **しかし最初は投稿へリンクを導線として置くだけで代用する**
     - リポスト
     - いいね
     - 引用(pending機能)
@@ -37,7 +38,7 @@ Webサービス
 
 # 技術要素 
 
-React, TypeScript, PWA, Firebase(Hosting, Firestore),  X API
+React, TypeScript, PWA, Firebase(Hosting, Firestore, Function),  X API
 
 # 外部サービス
 
