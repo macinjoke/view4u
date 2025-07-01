@@ -19,3 +19,6 @@ dist-ssr
 
 # Cache
 .cache
+
+# firebase
+.firebase
