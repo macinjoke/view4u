@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom'
 import Layout from './components/Layout'
-import ErrorPage from './pages/ErrorPage'
-import Home from './pages/Home'
-import Login from './pages/Login'
-import Settings from './pages/Settings'
-import Timeline from './pages/Timeline'
+import ErrorPage from './components/pages/ErrorPage'
+import Home from './components/pages/Home'
+import Login from './components/pages/Login'
+import Settings from './components/pages/Settings'
+import Timeline from './components/pages/Timeline'
 
 export const router = createBrowserRouter([
   {
