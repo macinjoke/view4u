@@ -10,3 +10,4 @@ export interface UserData {
 }
 
 export const userAtom = atom<UserData | null>(null)
+export const isUserLoadingAtom = atom<boolean>(true)

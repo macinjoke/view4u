@@ -3,7 +3,7 @@ import { doc, onSnapshot, setDoc } from 'firebase/firestore'
 import { useSetAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import { userAtom } from '../atoms/userAtom'
+import { isUserLoadingAtom, userAtom } from '../atoms/userAtom'
 import { auth, db } from '../firebase'
 import { signOutUser } from '../lib/auth'
 
@@ -11,6 +11,7 @@ function Layout() {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const setUserData = useSetAtom(userAtom)
+  const setIsUserLoading = useSetAtom(isUserLoadingAtom)
 
   useEffect(() => {
     let userDataUnsubscribe: (() => void) | null = null
@@ -44,8 +45,10 @@ function Layout() {
                 targetUserId: data.targetUserId,
                 updatedAt: data.updatedAt?.toDate() || new Date(),
               })
+              setIsUserLoading(false)
             } else {
               setUserData(null)
+              setIsUserLoading(false)
             }
           })
         } catch (error) {
@@ -69,7 +72,7 @@ function Layout() {
         userDataUnsubscribe()
       }
     }
-  }, [setUserData])
+  }, [setUserData, setIsUserLoading])
 
   const handleSignOut = async () => {
     try {
