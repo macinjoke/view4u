@@ -55,3 +55,4 @@ React, TypeScript, PWA, Firebase(Hosting, Firestore, Function),  X API
 ## X API
 
 - Rate Limit: https://docs.x.com/x-api/fundamentals/rate-limits
+- OAuth を使ってユーザーのコンテキストでAPIを使いたい
