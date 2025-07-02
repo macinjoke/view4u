@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../hooks/useAuth'
+import { signInWithTwitter } from '../../lib/auth'
 
 function Login() {
   const [isLoading, setIsLoading] = useState(false)
-  const { signInWithTwitter } = useAuth()
   const navigate = useNavigate()
 
   const handleTwitterLogin = async () => {

@@ -3,10 +3,8 @@ import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import { userAtom } from '../../atoms/userAtom'
 import { db } from '../../firebase'
-import { useAuth } from '../../hooks/useAuth'
 
 function Settings() {
-  const { user } = useAuth()
   const [userData] = useAtom(userAtom)
   const [targetUserId, setTargetUserId] = useState('')
   const [loading, setLoading] = useState(false)
@@ -19,7 +17,7 @@ function Settings() {
   }, [userData])
 
   const handleSave = async () => {
-    if (!user) return
+    if (!userData) return
 
     // 入力値の検証
     if (!targetUserId.trim()) {
@@ -39,7 +37,7 @@ function Settings() {
     setMessage('')
 
     try {
-      const userDocRef = doc(db, 'users', user.uid)
+      const userDocRef = doc(db, 'users', userData.uid)
       await updateDoc(userDocRef, {
         targetUserId: cleanedUserId,
         updatedAt: new Date(),
