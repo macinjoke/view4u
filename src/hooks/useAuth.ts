@@ -5,15 +5,35 @@ import {
   TwitterAuthProvider,
   type User,
 } from 'firebase/auth'
+import { doc, setDoc } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
-import { auth } from '../firebase'
+import { auth, db } from '../firebase'
 
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        // ユーザーがログインした場合、Firestoreにユーザードキュメントを作成
+        try {
+          const userDocRef = doc(db, 'users', user.uid)
+          await setDoc(
+            userDocRef,
+            {
+              uid: user.uid,
+              displayName: user.displayName,
+              email: user.email,
+              photoURL: user.photoURL,
+              updatedAt: new Date(),
+            },
+            { merge: true },
+          )
+        } catch (error) {
+          console.error('ユーザードキュメント作成エラー:', error)
+        }
+      }
       setUser(user)
       setLoading(false)
     })
