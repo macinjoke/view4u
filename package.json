@@ -13,6 +13,8 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@chakra-ui/react": "^3.21.1",
+    "@emotion/react": "^11.14.0",
     "firebase": "^11.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
