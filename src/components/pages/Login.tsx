@@ -1,3 +1,4 @@
+import { Box, Button, Heading, Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { signInWithTwitter } from '../../lib/auth'
@@ -20,27 +21,24 @@ function Login() {
   }
 
   return (
-    <div style={{ padding: '20px', textAlign: 'center', maxWidth: '400px', margin: '50px auto' }}>
-      <h2>ログイン</h2>
-      <p>Xアカウントでログインしてください</p>
-      <button
-        type="button"
+    <Box p={5} textAlign="center" maxW="400px" mx="auto" mt={12}>
+      <Heading size="lg" mb={4}>
+        ログイン
+      </Heading>
+      <Text mb={6} color="gray.600">
+        Xアカウントでログインしてください
+      </Text>
+      <Button
         onClick={handleTwitterLogin}
-        disabled={isLoading}
-        style={{
-          padding: '12px 24px',
-          fontSize: '16px',
-          backgroundColor: '#1DA1F2',
-          color: 'white',
-          border: 'none',
-          borderRadius: '25px',
-          cursor: isLoading ? 'not-allowed' : 'pointer',
-          opacity: isLoading ? 0.6 : 1,
-        }}
+        loading={isLoading}
+        colorScheme="twitter"
+        borderRadius="full"
+        size="lg"
+        px={8}
       >
         {isLoading ? 'ログイン中...' : 'Xでログイン'}
-      </button>
-    </div>
+      </Button>
+    </Box>
   )
 }
 

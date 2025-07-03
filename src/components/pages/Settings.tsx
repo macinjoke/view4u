@@ -1,3 +1,4 @@
+import { Alert, Box, Button, Field, Heading, Input } from '@chakra-ui/react'
 import { doc, updateDoc } from 'firebase/firestore'
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
@@ -54,53 +55,34 @@ function Settings() {
   }
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>設定</h2>
-      <div style={{ margin: '20px 0' }}>
-        <label>
-          ストーキング対象のアカウントID:
-          <input
-            type="text"
+    <Box p={5}>
+      <Heading size="lg" mb={6}>
+        設定
+      </Heading>
+      <Box mb={6}>
+        <Field.Root>
+          <Field.Label>ストーキング対象のアカウントID:</Field.Label>
+          <Input
             value={targetUserId}
             onChange={(e) => setTargetUserId(e.target.value)}
             placeholder="@username または username"
-            style={{ marginLeft: '10px', padding: '5px', width: '200px' }}
             disabled={loading}
+            mt={2}
           />
-        </label>
-      </div>
+        </Field.Root>
+      </Box>
 
-      <button
-        type="button"
-        onClick={handleSave}
-        disabled={loading}
-        style={{
-          padding: '10px 20px',
-          fontSize: '16px',
-          backgroundColor: loading ? '#ccc' : '#1d9bf0',
-          color: 'white',
-          border: 'none',
-          borderRadius: '4px',
-          cursor: loading ? 'not-allowed' : 'pointer',
-        }}
-      >
+      <Button onClick={handleSave} loading={loading} colorScheme="twitter" mb={4}>
         {loading ? '保存中...' : '設定を保存'}
-      </button>
+      </Button>
 
       {message && (
-        <div
-          style={{
-            marginTop: '10px',
-            padding: '10px',
-            backgroundColor: message.includes('失敗') ? '#ffebee' : '#e8f5e8',
-            color: message.includes('失敗') ? '#c62828' : '#2e7d32',
-            borderRadius: '4px',
-          }}
-        >
+        <Alert.Root status={message.includes('失敗') ? 'error' : 'success'}>
+          <Alert.Indicator />
           {message}
-        </div>
+        </Alert.Root>
       )}
-    </div>
+    </Box>
   )
 }
 

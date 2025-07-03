@@ -1,3 +1,4 @@
+import { Box, Spinner, Text } from '@chakra-ui/react'
 import { useAtom } from 'jotai'
 import type { ReactNode } from 'react'
 import { Navigate } from 'react-router-dom'
@@ -13,16 +14,17 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
   if (isUserLoading) {
     return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-        }}
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="100vh"
+        flexDirection="column"
+        gap={3}
       >
-        <div>読み込み中...</div>
-      </div>
+        <Spinner size="lg" />
+        <Text>読み込み中...</Text>
+      </Box>
     )
   }
 

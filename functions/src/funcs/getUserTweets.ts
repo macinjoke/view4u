@@ -13,8 +13,6 @@ export const getUserTweets = onCall(async (request) => {
 
     // デバッグログを追加
     logger.info('Request params:', { userId, maxResults, sinceId, untilId })
-    logger.info('userId type:', typeof userId)
-    logger.info('userId value:', userId)
 
     const client = getTwitterClient()
 

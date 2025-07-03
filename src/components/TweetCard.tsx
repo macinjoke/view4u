@@ -1,5 +1,5 @@
 // import { ExternalLinkIcon } from '@chakra-ui/icons'
-import { Avatar, Box, Card, HStack, Link, Text, VStack } from '@chakra-ui/react'
+import { Avatar, Box, Card, HStack, Image, Link, Text, VStack } from '@chakra-ui/react'
 import type { Tweet, TweetMedia } from '../types/tweet'
 
 interface TweetCardProps {
@@ -47,26 +47,24 @@ function TweetCard({ tweet, media }: TweetCardProps) {
                 {attachedMedia.map((mediaItem) => (
                   <Box key={mediaItem.media_key} mt={2}>
                     {mediaItem.type === 'photo' && mediaItem.url && (
-                      <img
+                      <Image
                         src={mediaItem.url}
                         alt="ツイート画像"
-                        style={{
-                          maxWidth: '100%',
-                          borderRadius: '8px',
-                          border: '1px solid #e2e8f0',
-                        }}
+                        maxW="100%"
+                        borderRadius="md"
+                        border="1px"
+                        borderColor="gray.200"
                       />
                     )}
                     {mediaItem.type === 'video' && mediaItem.preview_image_url && (
                       <Box position="relative">
-                        <img
+                        <Image
                           src={mediaItem.preview_image_url}
                           alt="動画のプレビュー"
-                          style={{
-                            maxWidth: '100%',
-                            borderRadius: '8px',
-                            border: '1px solid #e2e8f0',
-                          }}
+                          maxW="100%"
+                          borderRadius="md"
+                          border="1px"
+                          borderColor="gray.200"
                         />
                         <Text
                           position="absolute"

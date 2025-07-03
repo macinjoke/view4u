@@ -1,3 +1,4 @@
+import { Box, Button, Link as ChakraLink, Flex, HStack, Spinner, Text } from '@chakra-ui/react'
 import { onAuthStateChanged, type User } from 'firebase/auth'
 import { doc, onSnapshot, setDoc } from 'firebase/firestore'
 import { useSetAtom } from 'jotai'
@@ -83,65 +84,53 @@ function Layout() {
   }
 
   if (loading) {
-    return <div>読み込み中...</div>
+    return (
+      <Box p={5} textAlign="center">
+        <Spinner size="lg" />
+        <Text mt={2}>読み込み中...</Text>
+      </Box>
+    )
   }
 
   return (
-    <div className="App">
-      <nav
-        style={{
-          padding: '20px',
-          backgroundColor: '#f0f0f0',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <div>
-          <Link to="/" style={{ margin: '0 10px' }}>
-            ホーム
-          </Link>
-          {user && (
-            <>
-              <Link to="/timeline" style={{ margin: '0 10px' }}>
-                タイムライン
-              </Link>
-              <Link to="/settings" style={{ margin: '0 10px' }}>
-                設定
-              </Link>
-            </>
-          )}
-        </div>
+    <Box minH="100vh">
+      <Box as="nav" p={5} bg="gray.100" borderBottom="1px" borderColor="gray.200">
+        <Flex justify="space-between" align="center">
+          <HStack gap={4}>
+            <ChakraLink as={Link} to="/" fontWeight="medium">
+              ホーム
+            </ChakraLink>
+            {user && (
+              <>
+                <ChakraLink as={Link} to="/timeline" fontWeight="medium">
+                  タイムライン
+                </ChakraLink>
+                <ChakraLink as={Link} to="/settings" fontWeight="medium">
+                  設定
+                </ChakraLink>
+              </>
+            )}
+          </HStack>
 
-        <div>
-          {user ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span>こんにちは、{user.displayName || 'ユーザー'}さん</span>
-              <button
-                type="button"
-                onClick={handleSignOut}
-                style={{
-                  padding: '5px 10px',
-                  backgroundColor: '#dc3545',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                }}
-              >
-                ログアウト
-              </button>
-            </div>
-          ) : (
-            <Link to="/login" style={{ margin: '0 10px' }}>
-              ログイン
-            </Link>
-          )}
-        </div>
-      </nav>
+          <Box>
+            {user ? (
+              <HStack gap={4}>
+                <Text>こんにちは、{user.displayName || 'ユーザー'}さん</Text>
+                <Button onClick={handleSignOut} colorScheme="red" size="sm">
+                  ログアウト
+                </Button>
+              </HStack>
+            ) : (
+              <ChakraLink as={Link} to="/login" fontWeight="medium">
+                ログイン
+              </ChakraLink>
+            )}
+          </Box>
+        </Flex>
+      </Box>
 
       <Outlet />
-    </div>
+    </Box>
   )
 }
 
