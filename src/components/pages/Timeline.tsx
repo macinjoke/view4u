@@ -1,47 +1,29 @@
 import { Alert, Box, Center, Heading, Spinner, Text, VStack } from '@chakra-ui/react'
+import { useQuery } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
-import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { userAtom } from '../../atoms/userAtom'
-import { twitterService } from '../../lib/twitter'
+import { getUserByUsername, getUserTweets } from '../../lib/twitter'
 import type { Tweet, TweetMedia } from '../../types/tweet'
 import TweetCard from '../TweetCard'
 
 function Timeline() {
   const [user] = useAtom(userAtom)
-  const [tweets, setTweets] = useState<Tweet[]>([])
-  const [media, setMedia] = useState<TweetMedia[]>([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const navigate = useNavigate()
 
-  useEffect(() => {
-    const fetchTweets = async () => {
-      if (!user?.targetUserId) {
-        setError('対象ユーザーIDが設定されていません')
-        return
-      }
+  // ユーザー情報取得のクエリ
+  const userDataQuery = useQuery({
+    queryKey: ['user', user?.targetUserId],
+    queryFn: () => getUserByUsername(user!.targetUserId),
+    enabled: !!user?.targetUserId,
+  })
 
-      setLoading(true)
-      setError(null)
-
-      try {
-        const result1 = await twitterService.getUserByUsername(user.targetUserId)
-        console.log('result1:', result1)
-        alert('成功しました！ログを見て')
-        const result2 = await twitterService.getUserTweets(result1.id, {
-          maxResults: 20,
-        })
-        setTweets(result2.tweets)
-        setMedia(result2.media)
-      } catch (err) {
-        console.error(err)
-        setError('ツイートの取得に失敗しました。API設定を確認してください。')
-      }
-
-      setLoading(false)
-    }
-
-    fetchTweets()
-  }, [user?.targetUserId])
+  // ツイート取得のクエリ
+  const tweetsQuery = useQuery({
+    queryKey: ['tweets', userDataQuery.data?.id],
+    queryFn: () => getUserTweets(userDataQuery.data!.id, { maxResults: 20 }),
+    enabled: !!userDataQuery.data?.id,
+  })
 
   if (!user?.targetUserId) {
     return (
@@ -57,6 +39,36 @@ function Timeline() {
     )
   }
 
+  if (userDataQuery.isLoading || tweetsQuery.isLoading) {
+    return (
+      <Box p={6}>
+        <Heading size="lg" mb={4}>
+          タイムライン
+        </Heading>
+        <Center py={8}>
+          <Spinner size="lg" />
+        </Center>
+      </Box>
+    )
+  }
+
+  if (userDataQuery.error || tweetsQuery.error) {
+    return (
+      <Box p={6}>
+        <Heading size="lg" mb={4}>
+          タイムライン
+        </Heading>
+        <Alert.Root status="error">
+          <Alert.Indicator />
+          {userDataQuery.error?.message || tweetsQuery.error?.message || 'エラーが発生しました'}
+        </Alert.Root>
+      </Box>
+    )
+  }
+
+  const tweets = tweetsQuery.data?.tweets || []
+  const media = tweetsQuery.data?.media || []
+
   return (
     <Box p={6}>
       <Heading size="lg" mb={4}>
@@ -66,20 +78,7 @@ function Timeline() {
         対象アカウントの投稿一覧
       </Text>
 
-      {loading && (
-        <Center py={8}>
-          <Spinner size="lg" />
-        </Center>
-      )}
-
-      {error && (
-        <Alert.Root status="error" mb={4}>
-          <Alert.Indicator />
-          {error}
-        </Alert.Root>
-      )}
-
-      {!loading && tweets.length === 0 && !error && (
+      {tweets.length === 0 && (
         <Alert.Root status="info">
           <Alert.Indicator />
           ツイートが見つかりませんでした。

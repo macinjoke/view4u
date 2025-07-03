@@ -17,10 +17,10 @@ export const getUserTweets = onCall(async (request) => {
     logger.info('userId value:', userId)
 
     const client = getTwitterClient()
-    const response = await client.v2.userTimeline(userId, {
+
+    // パラメータオブジェクトを動的に構築（null/undefinedのプロパティを除外）
+    const timelineOptions: any = {
       max_results: maxResults,
-      since_id: sinceId || undefined,
-      until_id: untilId || undefined,
       'tweet.fields': [
         'created_at',
         'public_metrics',
@@ -31,7 +31,19 @@ export const getUserTweets = onCall(async (request) => {
       'user.fields': ['name', 'username', 'profile_image_url'],
       'media.fields': ['type', 'url', 'preview_image_url', 'width', 'height'],
       expansions: ['author_id', 'attachments.media_keys'],
-    })
+    }
+
+    // since_idが有効な値の場合のみ追加
+    if (sinceId && sinceId !== null && sinceId !== undefined && sinceId !== '') {
+      timelineOptions.since_id = sinceId
+    }
+
+    // until_idが有効な値の場合のみ追加
+    if (untilId && untilId !== null && untilId !== undefined && untilId !== '') {
+      timelineOptions.until_id = untilId
+    }
+
+    const response = await client.v2.userTimeline(userId, timelineOptions)
 
     const tweets =
       response.data.data?.map((tweet) => ({
