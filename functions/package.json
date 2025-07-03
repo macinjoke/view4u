@@ -10,15 +10,17 @@
     "logs": "firebase functions:log"
   },
   "engines": {
-    "node": ">=22.17.0"
+    "node": "22"
   },
   "volta": {
     "node": "22.17.0"
   },
   "main": "lib/index.js",
   "dependencies": {
+    "@google-cloud/functions-framework": "^3.4.0",
     "firebase-admin": "^12.6.0",
-    "firebase-functions": "^6.0.1"
+    "firebase-functions": "^6.0.1",
+    "twitter-api-v2": "^1.24.0"
   },
   "devDependencies": {
     "firebase-functions-test": "^3.1.0",

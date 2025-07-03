@@ -10,16 +10,19 @@
     "format": "biome format . --write",
     "check": "biome check . --write",
     "preview": "vite preview",
-    "prepare": "husky"
+    "prepare": "husky",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.2.4",
     "@chakra-ui/react": "^3.21.1",
     "@emotion/react": "^11.14.0",
     "firebase": "^11.10.0",
     "jotai": "^2.12.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^7.6.3"
+    "react-router-dom": "^7.6.3",
+    "twitter-api-v2": "^1.24.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.0.6",
