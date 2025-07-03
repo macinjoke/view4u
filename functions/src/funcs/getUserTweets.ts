@@ -19,8 +19,8 @@ export const getUserTweets = onCall(async (request) => {
     const client = getTwitterClient()
     const response = await client.v2.userTimeline(userId, {
       max_results: maxResults,
-      since_id: sinceId,
-      until_id: untilId,
+      since_id: sinceId || undefined,
+      until_id: untilId || undefined,
       'tweet.fields': [
         'created_at',
         'public_metrics',

@@ -8,6 +8,7 @@
 - 実装が終わったとき、pnpm type-check と pnpm checkを走らせてエラーがあれば直して。
 - npm run devは私がやるのでClaudeがやらなくて良い。
 - chakra-uiのコードを生成するときはchakra-ui v3をちゃんと使って。
+- フロントエンドのコードでclassを使うのはやめて
 
 ## プロダクト内容
 

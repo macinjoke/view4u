@@ -24,27 +24,20 @@ function Timeline() {
       setError(null)
 
       try {
-        const result = await twitterService.getUserByUsername(user.targetUserId)
-        console.log('result:', result)
+        const result1 = await twitterService.getUserByUsername(user.targetUserId)
+        console.log('result1:', result1)
         alert('成功しました！ログを見て')
+        const result2 = await twitterService.getUserTweets(result1.id, {
+          maxResults: 20,
+        })
+        setTweets(result2.tweets)
+        setMedia(result2.media)
       } catch (err) {
         console.error(err)
-        setError('失敗しました')
+        setError('ツイートの取得に失敗しました。API設定を確認してください。')
       }
-      setLoading(false)
 
-      // try {
-      //   const result = await twitterService.getUserTweets(user.targetUserId, {
-      //     maxResults: 20,
-      //   })
-      //   setTweets(result.tweets)
-      //   setMedia(result.media)
-      // } catch (err) {
-      //   console.error('ツイートの取得に失敗しました:', err)
-      //   setError('ツイートの取得に失敗しました。API設定を確認してください。')
-      // } finally {
-      //   setLoading(false)
-      // }
+      setLoading(false)
     }
 
     fetchTweets()
