@@ -11,7 +11,7 @@
     "check": "biome check . --write",
     "preview": "vite preview",
     "prepare": "husky",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit && pnpm --prefix functions type-check"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.2.4",

@@ -1,6 +1,6 @@
 import * as logger from 'firebase-functions/logger'
 import { HttpsError, onCall } from 'firebase-functions/v2/https'
-import { getTwitterClient } from '../utils/twitter'
+import { getTwitterClientWithOAuth } from '../utils/twitter'
 
 // Get user by username
 export const getUserByUsername = onCall(async (request) => {
@@ -11,7 +11,14 @@ export const getUserByUsername = onCall(async (request) => {
       throw new HttpsError('invalid-argument', 'username is required')
     }
 
-    const client = getTwitterClient()
+    // 認証されたユーザーのuidを取得
+    const uid = request.auth?.uid
+    if (!uid) {
+      throw new HttpsError('unauthenticated', 'User must be authenticated')
+    }
+
+    const client = await getTwitterClientWithOAuth(uid)
+
     const response = await client.v2.userByUsername(username, {
       'user.fields': ['id', 'name', 'username', 'profile_image_url'],
     })

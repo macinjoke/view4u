@@ -1,6 +1,7 @@
 import * as logger from 'firebase-functions/logger'
 import { HttpsError, onCall } from 'firebase-functions/v2/https'
-import { getTwitterClient } from '../utils/twitter'
+import type { TweetV2UserTimelineParams } from 'twitter-api-v2'
+import { getTwitterClientWithOAuth } from '../utils/twitter'
 
 // Get user tweets
 export const getUserTweets = onCall(async (request) => {
@@ -11,21 +12,19 @@ export const getUserTweets = onCall(async (request) => {
       throw new HttpsError('invalid-argument', 'userId is required')
     }
 
-    // デバッグログを追加
-    logger.info('Request params:', { userId, maxResults, sinceId, untilId })
+    // 認証されたユーザーのuidを取得
+    const uid = request.auth?.uid
+    if (!uid) {
+      throw new HttpsError('unauthenticated', 'User must be authenticated')
+    }
 
-    const client = getTwitterClient()
+    // デバッグログを追加
+    logger.info('Request params:', { userId, maxResults, sinceId, untilId, uid })
+
+    const client = await getTwitterClientWithOAuth(uid)
 
     // パラメータオブジェクトを動的に構築（null/undefinedのプロパティを除外）
-    const timelineOptions: {
-      max_results: number
-      'tweet.fields': string[]
-      'user.fields': string[]
-      'media.fields': string[]
-      expansions: string[]
-      since_id?: string
-      until_id?: string
-    } = {
+    const timelineOptions: Partial<TweetV2UserTimelineParams> = {
       max_results: maxResults,
       'tweet.fields': [
         'created_at',
