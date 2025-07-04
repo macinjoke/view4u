@@ -15,6 +15,11 @@ const queryClient = new QueryClient({
       staleTime: 5 * 60 * 1000, // 5分間はキャッシュを使用
       gcTime: 24 * 60 * 60 * 1000, // 24時間はガベージコレクションしない（永続化のため）
       retry: 2,
+      // エラーが発生してもキャッシュされたデータを保持する
+      retryOnMount: false,
+      refetchOnWindowFocus: false,
+      // バックグラウンドでの再フェッチでエラーが発生してもキャッシュを保持
+      throwOnError: false,
     },
   },
 })
@@ -53,6 +58,10 @@ ReactDOM.createRoot(reactRootDiv).render(
         persister,
         maxAge: 24 * 60 * 60 * 1000, // 24時間キャッシュを保持
         buster: '', // アプリのバージョンが変わったときにキャッシュをクリア
+      }}
+      onError={() => {
+        // エラーが発生してもキャッシュを削除しない
+        console.warn('Persist error (cache preserved)')
       }}
     >
       <ChakraProvider value={defaultSystem}>
