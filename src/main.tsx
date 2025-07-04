@@ -14,7 +14,7 @@ const queryClient = new QueryClient({
     queries: {
       staleTime: 5 * 60 * 1000, // 5分間はキャッシュを使用
       gcTime: 24 * 60 * 60 * 1000, // 24時間はガベージコレクションしない（永続化のため）
-      retry: 2,
+      retry: 1,
       // エラーが発生してもキャッシュされたデータを保持する
       retryOnMount: false,
       refetchOnWindowFocus: false,

@@ -15,7 +15,11 @@ if (getApps().length === 0) {
 }
 
 export { getUserByUsername } from './funcs/getUserByUsername'
-// Import all functions
 export { getUserTweets } from './funcs/getUserTweets'
+
+// モック用のFunctions
+export { mockGetUserByUsername } from './funcs/mockGetUserByUsername'
+export { mockGetUserTweets } from './funcs/mockGetUserTweets'
+export { toggleMock429Error } from './funcs/toggleMock429Error'
 
 setGlobalOptions({ maxInstances: 10 })

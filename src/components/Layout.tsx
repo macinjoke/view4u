@@ -7,6 +7,7 @@ import { Link, Outlet } from 'react-router-dom'
 import { isUserLoadingAtom, userAtom } from '../atoms/userAtom'
 import { auth, db } from '../firebase'
 import { signOutUser } from '../lib/auth'
+import { toggleMock429Error } from '../lib/twitter'
 
 function Layout() {
   const [user, setUser] = useState<User | null>(null)
@@ -83,6 +84,11 @@ function Layout() {
     }
   }
 
+  const onToggle429Click = async () => {
+    console.log('onToggle429Click')
+    await toggleMock429Error()
+  }
+
   if (loading) {
     return (
       <Box p={5} textAlign="center">
@@ -108,6 +114,7 @@ function Layout() {
                 <Link to="/settings">
                   <ChakraLink fontWeight="medium">設定</ChakraLink>
                 </Link>
+                {import.meta.env.DEV && <Button onClick={onToggle429Click}>toggle 429</Button>}
               </>
             )}
           </HStack>
