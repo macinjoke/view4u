@@ -97,17 +97,17 @@ function Layout() {
       <Box as="nav" p={5} bg="gray.100" borderBottom="1px" borderColor="gray.200">
         <Flex justify="space-between" align="center">
           <HStack gap={4}>
-            <ChakraLink as={Link} to="/" fontWeight="medium">
-              ホーム
-            </ChakraLink>
+            <Link to="/">
+              <ChakraLink fontWeight="medium">ホーム</ChakraLink>
+            </Link>
             {user && (
               <>
-                <ChakraLink as={Link} to="/timeline" fontWeight="medium">
-                  タイムライン
-                </ChakraLink>
-                <ChakraLink as={Link} to="/settings" fontWeight="medium">
-                  設定
-                </ChakraLink>
+                <Link to="/timeline">
+                  <ChakraLink fontWeight="medium">タイムライン</ChakraLink>
+                </Link>
+                <Link to="/settings">
+                  <ChakraLink fontWeight="medium">設定</ChakraLink>
+                </Link>
               </>
             )}
           </HStack>
@@ -121,9 +121,9 @@ function Layout() {
                 </Button>
               </HStack>
             ) : (
-              <ChakraLink as={Link} to="/login" fontWeight="medium">
-                ログイン
-              </ChakraLink>
+              <Link to="/login">
+                <ChakraLink fontWeight="medium">ログイン</ChakraLink>
+              </Link>
             )}
           </Box>
         </Flex>
