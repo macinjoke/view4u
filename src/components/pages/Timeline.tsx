@@ -1,27 +1,34 @@
 import { Alert, Box, Center, Heading, Spinner, Text, VStack } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
-import { useNavigate } from 'react-router-dom'
 import { userAtom } from '../../atoms/userAtom'
 import { getUserByUsername, getUserTweets } from '../../lib/twitter'
-import type { Tweet, TweetMedia } from '../../types/tweet'
 import TweetCard from '../TweetCard'
 
 function Timeline() {
   const [user] = useAtom(userAtom)
-  const navigate = useNavigate()
 
   // ユーザー情報取得のクエリ
   const userDataQuery = useQuery({
     queryKey: ['user', user?.targetUserId],
-    queryFn: () => getUserByUsername(user!.targetUserId),
+    queryFn: () => {
+      if (!user?.targetUserId) {
+        throw new Error('Target user ID is required')
+      }
+      return getUserByUsername(user.targetUserId)
+    },
     enabled: !!user?.targetUserId,
   })
 
   // ツイート取得のクエリ
   const tweetsQuery = useQuery({
     queryKey: ['tweets', userDataQuery.data?.id],
-    queryFn: () => getUserTweets(userDataQuery.data!.id, { maxResults: 20 }),
+    queryFn: () => {
+      if (!userDataQuery.data?.id) {
+        throw new Error('User data ID is required')
+      }
+      return getUserTweets(userDataQuery.data.id, { maxResults: 20 })
+    },
     enabled: !!userDataQuery.data?.id,
   })
 

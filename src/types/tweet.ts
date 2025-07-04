@@ -53,3 +53,10 @@ export interface TweetMedia {
   width?: number
   height?: number
 }
+
+export interface TwitterUser {
+  id: string
+  name: string
+  username: string
+  profile_image_url: string
+}

@@ -1,5 +1,5 @@
 import { connectFunctionsEmulator, getFunctions, httpsCallable } from 'firebase/functions'
-import type { Tweet, TweetMedia } from '../types/tweet'
+import type { Tweet, TweetMedia, TwitterUser } from '../types/tweet'
 
 // Firebase Functions の初期化
 const functions = getFunctions()
@@ -33,13 +33,13 @@ export async function getUserTweets(
 }
 
 // ユーザー名からユーザー情報を取得する関数
-export async function getUserByUsername(username: string) {
+export async function getUserByUsername(username: string): Promise<TwitterUser> {
   try {
     console.log(`🌐 Fetching user data for @${username} from API...`)
     const getUserByUsernameFunction = httpsCallable(functions, 'getUserByUsername')
     const result = await getUserByUsernameFunction({ username })
 
-    return result.data
+    return result.data as TwitterUser
   } catch (error) {
     console.error('Failed to fetch user by username:', error)
     throw error

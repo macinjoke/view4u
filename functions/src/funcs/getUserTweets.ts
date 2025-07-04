@@ -17,7 +17,15 @@ export const getUserTweets = onCall(async (request) => {
     const client = getTwitterClient()
 
     // パラメータオブジェクトを動的に構築（null/undefinedのプロパティを除外）
-    const timelineOptions: any = {
+    const timelineOptions: {
+      max_results: number
+      'tweet.fields': string[]
+      'user.fields': string[]
+      'media.fields': string[]
+      expansions: string[]
+      since_id?: string
+      until_id?: string
+    } = {
       max_results: maxResults,
       'tweet.fields': [
         'created_at',
