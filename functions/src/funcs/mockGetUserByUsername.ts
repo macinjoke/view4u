@@ -4,7 +4,7 @@ import { mockUser } from '../data/mockData'
 import { getMock429Flag } from '../utils/mockFlags'
 
 // モック版：Get user by username
-export const mockGetUserByUsername = onCall(async (request) => {
+export const mockGetUserByUsername = onCall({ region: 'asia-northeast1' }, async (request) => {
   try {
     const { username } = request.data
 

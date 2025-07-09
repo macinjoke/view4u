@@ -1,8 +1,7 @@
-import { connectFunctionsEmulator, getFunctions, httpsCallable } from 'firebase/functions'
+import { connectFunctionsEmulator, httpsCallable } from 'firebase/functions'
+import { functions } from '../firebase'
 import type { Tweet, TweetMedia, TwitterUser } from '../types/tweet'
 
-// Firebase Functions の初期化
-const functions = getFunctions()
 // connectFunctionsEmulator(functions, 'localhost', 5001)
 
 // 開発環境でモックAPIを使用するかどうかの設定

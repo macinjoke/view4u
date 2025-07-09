@@ -3,7 +3,7 @@ import { HttpsError, onCall } from 'firebase-functions/v2/https'
 import { toggleMock429Flag } from '../utils/mockFlags'
 
 // モックAPIで429エラーを切り替える関数
-export const toggleMock429Error = onCall(async (request) => {
+export const toggleMock429Error = onCall({ region: 'asia-northeast1' }, async (request) => {
   try {
     // 認証されたユーザーのuidを取得
     const uid = request.auth?.uid

@@ -4,7 +4,7 @@ import { mockMedia, mockTweets } from '../data/mockData'
 import { getMock429Flag } from '../utils/mockFlags'
 
 // モック版：Get user tweets
-export const mockGetUserTweets = onCall(async (request) => {
+export const mockGetUserTweets = onCall({ region: 'asia-northeast1' }, async (request) => {
   try {
     const { userId, maxResults = 20, sinceId, untilId } = request.data
 
