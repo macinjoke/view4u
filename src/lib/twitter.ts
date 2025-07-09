@@ -3,7 +3,7 @@ import type { Tweet, TweetMedia, TwitterUser } from '../types/tweet'
 
 // Firebase Functions の初期化
 const functions = getFunctions()
-connectFunctionsEmulator(functions, 'localhost', 5001)
+// connectFunctionsEmulator(functions, 'localhost', 5001)
 
 // 開発環境でモックAPIを使用するかどうかの設定
 const USE_MOCK_API =
