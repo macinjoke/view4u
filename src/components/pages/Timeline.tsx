@@ -59,42 +59,43 @@ function Timeline() {
     )
   }
 
+  // キャッシュされたデータがある場合は表示（エラーがあってもキャッシュを表示）
   if (tweetsQuery.data) {
     const tweets = tweetsQuery.data?.tweets || []
     const media = tweetsQuery.data?.media || []
     return (
       <Box p={6}>
+        <Heading size="lg" mb={4}>
+          タイムライン
+        </Heading>
         {tweetsQuery.error && (
           <Alert.Root status="warning" mb={4}>
             <Alert.Indicator />
-            データの更新に失敗。X APIの制限により15分に1度の更新となります。
+            データの更新に失敗しました。X
+            APIの制限により15分に1度の更新となります。キャッシュされたデータを表示しています。
           </Alert.Root>
         )}
-        <Box p={6}>
-          <Heading size="lg" mb={4}>
-            タイムライン
-          </Heading>
-          <Text mb={6} color="gray.600">
-            対象アカウントの投稿一覧
-          </Text>
+        <Text mb={6} color="gray.600">
+          対象アカウントの投稿一覧
+        </Text>
 
-          {tweets.length === 0 && (
-            <Alert.Root status="info">
-              <Alert.Indicator />
-              ツイートはありません。
-            </Alert.Root>
-          )}
+        {tweets.length === 0 && (
+          <Alert.Root status="info">
+            <Alert.Indicator />
+            ツイートはありません。
+          </Alert.Root>
+        )}
 
-          <VStack gap={0} align="stretch">
-            {tweets.map((tweet) => (
-              <TweetCard key={tweet.id} tweet={tweet} media={media} />
-            ))}
-          </VStack>
-        </Box>
+        <VStack gap={0} align="stretch">
+          {tweets.map((tweet) => (
+            <TweetCard key={tweet.id} tweet={tweet} media={media} />
+          ))}
+        </VStack>
       </Box>
     )
   }
 
+  // データもキャッシュもない場合のエラー表示
   if (userDataQuery.error || tweetsQuery.error) {
     return (
       <Box p={6}>
