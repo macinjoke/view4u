@@ -2,7 +2,9 @@ import { connectFunctionsEmulator, httpsCallable } from 'firebase/functions'
 import { functions } from '../firebase'
 import type { Tweet, TweetMedia, TwitterUser } from '../types/tweet'
 
-// connectFunctionsEmulator(functions, 'localhost', 5001)
+if (import.meta.env.VITE_USE_EMULATOR === 'true') {
+  connectFunctionsEmulator(functions, 'localhost', 5001)
+}
 
 // 開発環境でモックAPIを使用するかどうかの設定
 const USE_MOCK_API =
