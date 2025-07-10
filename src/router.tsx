@@ -5,7 +5,6 @@ import ErrorPage from './components/pages/error/ErrorPage'
 import Home from './components/pages/home/Home'
 import Login from './components/pages/login/Login'
 import Settings from './components/pages/settings/Settings'
-import Timeline from './components/pages/timeline/Timeline'
 
 export const router = createBrowserRouter([
   {
@@ -24,14 +23,6 @@ export const router = createBrowserRouter([
       {
         path: 'login',
         element: <Login />,
-      },
-      {
-        path: 'timeline',
-        element: (
-          <ProtectedRoute>
-            <Timeline />
-          </ProtectedRoute>
-        ),
       },
       {
         path: 'settings',

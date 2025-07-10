@@ -107,7 +107,6 @@ function Layout() {
             <NavLink to="/">ホーム</NavLink>
             {user && (
               <>
-                <NavLink to="/timeline">タイムライン</NavLink>
                 <NavLink to="/settings">設定</NavLink>
                 {import.meta.env.DEV && <Button onClick={onToggle429Click}>toggle 429</Button>}
               </>
