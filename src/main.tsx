@@ -12,8 +12,7 @@ import { router } from './router.tsx'
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 15 * 60 * 1000, // 15分間はキャッシュを使用（X APIレート制限対応）
-      // staleTime: 0.2 * 60 * 1000, // 15分間はキャッシュを使用（X APIレート制限対応）
+      staleTime: Number(import.meta.env.VITE_STALE_TIME) * 60 * 1000, // VITE_STALE_TIME 分はキャッシュを使用
       gcTime: 24 * 60 * 60 * 1000, // 24時間はメモリ内にキャッシュを保持（永続化と同じ期間）
       retry: (failureCount, error) => {
         // 429エラー（レート制限）の場合は再試行しない
