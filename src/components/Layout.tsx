@@ -122,7 +122,7 @@ function Layout() {
           <Box>
             {user ? (
               <HStack gap={4}>
-                <Text>こんにちは、{user.displayName || 'ユーザー'}さん</Text>
+                <Text>{user.displayName || 'null'}</Text>
                 <Button onClick={handleSignOut} colorScheme="red" size="sm">
                   ログアウト
                 </Button>
