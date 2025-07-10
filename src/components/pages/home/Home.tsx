@@ -35,9 +35,6 @@ function Home() {
   if (!user?.targetUserId) {
     return (
       <Box p={6}>
-        <Heading size="lg" mb={4}>
-          タイムライン
-        </Heading>
         <Alert.Root status="warning">
           <Alert.Indicator />
           設定画面で対象ユーザーを設定してください。
@@ -49,9 +46,6 @@ function Home() {
   if (userDataQuery.isLoading || tweetsQuery.isLoading) {
     return (
       <Box p={6}>
-        <Heading size="lg" mb={4}>
-          タイムライン
-        </Heading>
         <Center py={8}>
           <Spinner size="lg" />
         </Center>
@@ -65,9 +59,6 @@ function Home() {
     const media = tweetsQuery.data?.media || []
     return (
       <Box p={6}>
-        <Heading size="lg" mb={4}>
-          タイムライン
-        </Heading>
         {tweetsQuery.error && (
           <Alert.Root status="warning" mb={4}>
             <Alert.Indicator />
@@ -75,17 +66,12 @@ function Home() {
             APIの制限により15分に1度の更新となります。キャッシュされたデータを表示しています。
           </Alert.Root>
         )}
-        <Text mb={6} color="gray.600">
-          対象アカウントの投稿一覧
-        </Text>
-
         {tweets.length === 0 && (
           <Alert.Root status="info">
             <Alert.Indicator />
             ツイートはありません。
           </Alert.Root>
         )}
-
         <VStack gap={0} align="stretch">
           {tweets.map((tweet) => (
             <TweetCard key={tweet.id} tweet={tweet} media={media} />
@@ -99,9 +85,6 @@ function Home() {
   if (userDataQuery.error || tweetsQuery.error) {
     return (
       <Box p={6}>
-        <Heading size="lg" mb={4}>
-          タイムライン
-        </Heading>
         <Alert.Root status="error">
           <Alert.Indicator />
           {userDataQuery.error?.message || tweetsQuery.error?.message || 'エラーが発生しました'}

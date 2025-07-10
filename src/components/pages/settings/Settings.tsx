@@ -56,12 +56,9 @@ function Settings() {
 
   return (
     <Box p={5}>
-      <Heading size="lg" mb={6}>
-        設定
-      </Heading>
       <Box mb={6}>
         <Field.Root>
-          <Field.Label>ストーキング対象のアカウントID:</Field.Label>
+          <Field.Label>見守りたい対象のアカウントID:</Field.Label>
           <Input
             value={targetUserId}
             onChange={(e) => setTargetUserId(e.target.value)}
