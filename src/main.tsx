@@ -12,8 +12,9 @@ import { router } from './router.tsx'
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000, // 5分間はキャッシュを使用
-      gcTime: 24 * 60 * 60 * 1000, // 24時間はガベージコレクションしない（永続化のため）
+      staleTime: 15 * 60 * 1000, // 15分間はキャッシュを使用
+      // gcTime: 24 * 60 * 60 * 1000, // 24時間はガベージコレクションしない（永続化のため）
+      gcTime: Infinity, // 24時間はガベージコレクションしない（永続化のため）
       retry: 1,
       // エラーが発生してもキャッシュされたデータを保持する
       retryOnMount: false,
@@ -56,8 +57,8 @@ ReactDOM.createRoot(reactRootDiv).render(
       client={queryClient}
       persistOptions={{
         persister,
-        maxAge: 24 * 60 * 60 * 1000, // 24時間キャッシュを保持
-        buster: '', // アプリのバージョンが変わったときにキャッシュをクリア
+        // maxAge: 24 * 60 * 60 * 1000, // 24時間キャッシュを保持
+        buster: '1', // アプリのバージョンが変わったときにキャッシュをクリア
       }}
       onError={() => {
         // エラーが発生してもキャッシュを削除しない
