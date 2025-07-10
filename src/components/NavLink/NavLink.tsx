@@ -15,15 +15,14 @@ function NavLink({ to, children }: NavLinkProps) {
     <Link to={to}>
       <ChakraLink
         fontWeight="medium"
-        color={isActive ? 'blue.500' : 'gray.600'}
-        bg={isActive ? 'blue.50' : 'transparent'}
+        color="gray.600"
+        bg={isActive ? 'blue.100' : 'transparent'}
         px={3}
         py={2}
         rounded="md"
-        _hover={{
-          bg: isActive ? 'blue.100' : 'gray.100',
-          color: isActive ? 'blue.600' : 'gray.800',
-        }}
+        _hover={{ bg: 'blue.100' }}
+        textDecoration="none"
+        transition="background 0.2s"
       >
         {children}
       </ChakraLink>
