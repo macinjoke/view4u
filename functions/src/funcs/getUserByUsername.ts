@@ -32,6 +32,14 @@ export const getUserByUsername = onCall(
       return response.data
     } catch (error) {
       logger.error('Failed to fetch user by username:', error)
+
+      // 429エラー（Rate Limit）の場合は特別に処理
+      if (error && typeof error === 'object' && 'code' in error) {
+        if (error.code === 429) {
+          throw new HttpsError('resource-exhausted', 'Rate limit exceeded. Please wait 15 minutes.')
+        }
+      }
+
       throw new HttpsError('internal', 'Failed to fetch user by username')
     }
   },
