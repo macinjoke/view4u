@@ -1,6 +1,6 @@
 // import { ExternalLinkIcon } from '@chakra-ui/icons'
 import { Avatar, Box, Card, HStack, Image, Link, Text, VStack } from '@chakra-ui/react'
-import type { Tweet, TweetMedia } from '../types/tweet'
+import type { Tweet, TweetMedia } from '../../types/tweet'
 
 interface TweetCardProps {
   tweet: Tweet

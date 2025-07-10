@@ -4,11 +4,11 @@ import { doc, onSnapshot, setDoc } from 'firebase/firestore'
 import { useSetAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import { isUserLoadingAtom, userAtom } from '../atoms/userAtom'
-import { auth, db } from '../firebase'
-import { signOutUser } from '../lib/auth'
-import { toggleMock429Error } from '../lib/twitter'
-import NavLink from './NavLink'
+import { isUserLoadingAtom, userAtom } from '../../atoms/userAtom'
+import { auth, db } from '../../firebase'
+import { signOutUser } from '../../lib/auth'
+import { toggleMock429Error } from '../../lib/twitter'
+import NavLink from '../NavLink/NavLink'
 
 function Layout() {
   const [user, setUser] = useState<User | null>(null)

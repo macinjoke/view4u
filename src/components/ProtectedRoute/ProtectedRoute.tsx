@@ -2,7 +2,7 @@ import { Box, Spinner, Text } from '@chakra-ui/react'
 import { useAtom } from 'jotai'
 import type { ReactNode } from 'react'
 import { Navigate } from 'react-router-dom'
-import { isUserLoadingAtom, userAtom } from '../atoms/userAtom'
+import { isUserLoadingAtom, userAtom } from '../../atoms/userAtom'
 
 interface ProtectedRouteProps {
   children: ReactNode

@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
 import { userAtom } from '../../../atoms/userAtom'
 import { getUserByUsername, getUserTweets } from '../../../lib/twitter'
-import TweetCard from '../../TweetCard'
+import TweetCard from '../../TweetCard/TweetCard'
 
 function Timeline() {
   const [user] = useAtom(userAtom)
