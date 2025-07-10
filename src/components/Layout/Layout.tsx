@@ -8,7 +8,7 @@ import { isUserLoadingAtom, userAtom } from '../../atoms/userAtom'
 import { auth, db } from '../../firebase'
 import { signOutUser } from '../../lib/auth'
 import { toggleMock429Error } from '../../lib/twitter'
-import NavLink from '../NavLink/NavLink'
+import NavLink from './NavLink/NavLink'
 
 function Layout() {
   const [user, setUser] = useState<User | null>(null)
