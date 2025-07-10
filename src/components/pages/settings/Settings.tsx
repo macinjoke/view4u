@@ -2,8 +2,8 @@ import { Alert, Box, Button, Field, Heading, Input } from '@chakra-ui/react'
 import { doc, updateDoc } from 'firebase/firestore'
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
-import { userAtom } from '../../atoms/userAtom'
-import { db } from '../../firebase'
+import { userAtom } from '../../../atoms/userAtom'
+import { db } from '../../../firebase'
 
 function Settings() {
   const [userData] = useAtom(userAtom)

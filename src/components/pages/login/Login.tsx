@@ -1,7 +1,7 @@
 import { Box, Button, Heading, Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { signInWithTwitter } from '../../lib/auth'
+import { signInWithTwitter } from '../../../lib/auth'
 
 function Login() {
   const [isLoading, setIsLoading] = useState(false)

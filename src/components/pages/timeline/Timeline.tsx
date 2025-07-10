@@ -1,9 +1,9 @@
 import { Alert, Box, Center, Heading, Spinner, Text, VStack } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
-import { userAtom } from '../../atoms/userAtom'
-import { getUserByUsername, getUserTweets } from '../../lib/twitter'
-import TweetCard from '../TweetCard'
+import { userAtom } from '../../../atoms/userAtom'
+import { getUserByUsername, getUserTweets } from '../../../lib/twitter'
+import TweetCard from '../../TweetCard'
 
 function Timeline() {
   const [user] = useAtom(userAtom)
