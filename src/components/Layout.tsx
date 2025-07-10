@@ -8,6 +8,7 @@ import { isUserLoadingAtom, userAtom } from '../atoms/userAtom'
 import { auth, db } from '../firebase'
 import { signOutUser } from '../lib/auth'
 import { toggleMock429Error } from '../lib/twitter'
+import NavLink from './NavLink'
 
 function Layout() {
   const [user, setUser] = useState<User | null>(null)
@@ -103,17 +104,11 @@ function Layout() {
       <Box as="nav" p={5} bg="gray.100" borderBottom="1px" borderColor="gray.200">
         <Flex justify="space-between" align="center">
           <HStack gap={4}>
-            <Link to="/">
-              <ChakraLink fontWeight="medium">ホーム</ChakraLink>
-            </Link>
+            <NavLink to="/">ホーム</NavLink>
             {user && (
               <>
-                <Link to="/timeline">
-                  <ChakraLink fontWeight="medium">タイムライン</ChakraLink>
-                </Link>
-                <Link to="/settings">
-                  <ChakraLink fontWeight="medium">設定</ChakraLink>
-                </Link>
+                <NavLink to="/timeline">タイムライン</NavLink>
+                <NavLink to="/settings">設定</NavLink>
                 {import.meta.env.DEV && <Button onClick={onToggle429Click}>toggle 429</Button>}
               </>
             )}

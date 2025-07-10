@@ -1,0 +1,34 @@
+import { Link as ChakraLink } from '@chakra-ui/react'
+import type { ReactNode } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+
+interface NavLinkProps {
+  to: string
+  children: ReactNode
+}
+
+function NavLink({ to, children }: NavLinkProps) {
+  const location = useLocation()
+  const isActive = location.pathname === to
+
+  return (
+    <Link to={to}>
+      <ChakraLink
+        fontWeight="medium"
+        color={isActive ? 'blue.500' : 'gray.600'}
+        bg={isActive ? 'blue.50' : 'transparent'}
+        px={3}
+        py={2}
+        rounded="md"
+        _hover={{
+          bg: isActive ? 'blue.100' : 'gray.100',
+          color: isActive ? 'blue.600' : 'gray.800',
+        }}
+      >
+        {children}
+      </ChakraLink>
+    </Link>
+  )
+}
+
+export default NavLink
