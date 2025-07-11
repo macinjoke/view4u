@@ -102,15 +102,15 @@ function Layout() {
   return (
     <Box minH="100vh">
       <Box as="nav" p={{ base: 3, md: 5 }} bg="gray.100" borderBottom="1px" borderColor="gray.200">
-        <Flex justify="space-between" align="center" gap={2}>
+        <Flex justify="space-between" align="center">
           <HStack gap={{ base: 2, md: 4 }}>
             <NavLink to="/">ホーム</NavLink>
             {user && (
               <>
                 <NavLink to="/settings">設定</NavLink>
                 {import.meta.env.DEV && (
-                  <Button onClick={onToggle429Click} size={{ base: 'sm', md: 'md' }}>
-                    toggle 429
+                  <Button onClick={onToggle429Click} size="xs" p="0" fontSize="8px">
+                    429
                   </Button>
                 )}
               </>
@@ -120,9 +120,7 @@ function Layout() {
           <Box>
             {user ? (
               <HStack gap={{ base: 2, md: 4 }}>
-                <Text fontSize={{ base: 'sm', md: 'md' }} display={{ base: 'none', sm: 'block' }}>
-                  {user.displayName || 'null'}
-                </Text>
+                <Text fontSize={{ base: 'sm', md: 'md' }}>{user.displayName || 'null'}</Text>
                 <Button onClick={handleSignOut} colorScheme="red" size={{ base: 'sm', md: 'md' }}>
                   ログアウト
                 </Button>
