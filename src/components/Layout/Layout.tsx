@@ -101,29 +101,37 @@ function Layout() {
 
   return (
     <Box minH="100vh">
-      <Box as="nav" p={5} bg="gray.100" borderBottom="1px" borderColor="gray.200">
-        <Flex justify="space-between" align="center">
-          <HStack gap={4}>
+      <Box as="nav" p={{ base: 3, md: 5 }} bg="gray.100" borderBottom="1px" borderColor="gray.200">
+        <Flex justify="space-between" align="center" gap={2}>
+          <HStack gap={{ base: 2, md: 4 }}>
             <NavLink to="/">ホーム</NavLink>
             {user && (
               <>
                 <NavLink to="/settings">設定</NavLink>
-                {import.meta.env.DEV && <Button onClick={onToggle429Click}>toggle 429</Button>}
+                {import.meta.env.DEV && (
+                  <Button onClick={onToggle429Click} size={{ base: 'sm', md: 'md' }}>
+                    toggle 429
+                  </Button>
+                )}
               </>
             )}
           </HStack>
 
           <Box>
             {user ? (
-              <HStack gap={4}>
-                <Text>{user.displayName || 'null'}</Text>
-                <Button onClick={handleSignOut} colorScheme="red" size="sm">
+              <HStack gap={{ base: 2, md: 4 }}>
+                <Text fontSize={{ base: 'sm', md: 'md' }} display={{ base: 'none', sm: 'block' }}>
+                  {user.displayName || 'null'}
+                </Text>
+                <Button onClick={handleSignOut} colorScheme="red" size={{ base: 'sm', md: 'md' }}>
                   ログアウト
                 </Button>
               </HStack>
             ) : (
               <Link to="/login">
-                <ChakraLink fontWeight="medium">ログイン</ChakraLink>
+                <ChakraLink fontWeight="medium" fontSize={{ base: 'sm', md: 'md' }}>
+                  ログイン
+                </ChakraLink>
               </Link>
             )}
           </Box>

@@ -24,23 +24,31 @@ function TweetCard({ tweet, media }: TweetCardProps) {
   const attachedMedia = media?.filter((m) => tweet.attachments?.media_keys?.includes(m.media_key))
 
   return (
-    <Card.Root mb={4} variant="outline">
-      <Card.Body>
-        <HStack align="start" gap={3}>
-          <Avatar.Root size="sm">
+    <Card.Root mb={{ base: 3, md: 4 }} variant="outline">
+      <Card.Body p={{ base: 3, md: 4 }}>
+        <HStack align="start" gap={{ base: 2, md: 3 }}>
+          <Avatar.Root size={{ base: 'xs', md: 'sm' }}>
             <Avatar.Image src={tweet.author.profile_image_url} alt={tweet.author.name} />
             <Avatar.Fallback>{tweet.author.name[0]}</Avatar.Fallback>
           </Avatar.Root>
           <VStack align="start" flex={1} gap={2}>
-            <HStack>
-              <Text fontWeight="bold">{tweet.author.name}</Text>
-              <Text color="gray.500">@{tweet.author.username}</Text>
-              <Text color="gray.500" fontSize="sm">
+            <VStack align="start" gap={1}>
+              <HStack wrap="wrap" gap={1}>
+                <Text fontWeight="bold" fontSize={{ base: 'sm', md: 'md' }}>
+                  {tweet.author.name}
+                </Text>
+                <Text color="gray.500" fontSize={{ base: 'xs', md: 'sm' }}>
+                  @{tweet.author.username}
+                </Text>
+              </HStack>
+              <Text color="gray.500" fontSize={{ base: 'xs', md: 'sm' }}>
                 {formatDate(tweet.created_at)}
               </Text>
-            </HStack>
+            </VStack>
 
-            <Text whiteSpace="pre-wrap">{tweet.text}</Text>
+            <Text whiteSpace="pre-wrap" fontSize={{ base: 'sm', md: 'md' }}>
+              {tweet.text}
+            </Text>
 
             {attachedMedia && attachedMedia.length > 0 && (
               <Box>
@@ -87,7 +95,12 @@ function TweetCard({ tweet, media }: TweetCardProps) {
               </Box>
             )}
 
-            <HStack gap={6} color="gray.500" fontSize="sm">
+            <HStack
+              gap={{ base: 3, md: 6 }}
+              color="gray.500"
+              fontSize={{ base: 'xs', md: 'sm' }}
+              wrap="wrap"
+            >
               <Text>返信 {tweet.public_metrics.reply_count}</Text>
               <Text>リポスト {tweet.public_metrics.retweet_count}</Text>
               <Text>いいね {tweet.public_metrics.like_count}</Text>
@@ -95,7 +108,7 @@ function TweetCard({ tweet, media }: TweetCardProps) {
                 <Text>保存 {tweet.public_metrics.bookmark_count}</Text>
               )}
               {tweet.public_metrics.impression_count !== undefined && (
-                <Text>
+                <Text display={{ base: 'none', sm: 'block' }}>
                   インプレッション {tweet.public_metrics.impression_count.toLocaleString()}
                 </Text>
               )}
@@ -106,7 +119,7 @@ function TweetCard({ tweet, media }: TweetCardProps) {
               target="_blank"
               rel="noopener noreferrer"
               color="blue.500"
-              fontSize="sm"
+              fontSize={{ base: 'xs', md: 'sm' }}
             >
               Xで開く
             </Link>

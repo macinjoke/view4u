@@ -34,7 +34,7 @@ function Home() {
 
   if (!user?.targetUserId) {
     return (
-      <Box p={6}>
+      <Box p={{ base: 3, md: 6 }}>
         <Alert.Root status="warning">
           <Alert.Indicator />
           設定画面で対象ユーザーを設定してください。
@@ -45,7 +45,7 @@ function Home() {
 
   if (userDataQuery.isLoading || tweetsQuery.isLoading) {
     return (
-      <Box p={6}>
+      <Box p={{ base: 3, md: 6 }}>
         <Center py={8}>
           <Spinner size="lg" />
         </Center>
@@ -58,7 +58,7 @@ function Home() {
     const tweets = tweetsQuery.data?.tweets || []
     const media = tweetsQuery.data?.media || []
     return (
-      <Box p={6}>
+      <Box p={{ base: 3, md: 6 }}>
         {tweetsQuery.error && (
           <Alert.Root status="warning" mb={4}>
             <Alert.Indicator />
@@ -84,7 +84,7 @@ function Home() {
   // データもキャッシュもない場合のエラー表示
   if (userDataQuery.error || tweetsQuery.error) {
     return (
-      <Box p={6}>
+      <Box p={{ base: 3, md: 6 }}>
         <Alert.Root status="error">
           <Alert.Indicator />
           {userDataQuery.error?.message || tweetsQuery.error?.message || 'エラーが発生しました'}
