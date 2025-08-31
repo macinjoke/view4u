@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Field, Heading, Input } from '@chakra-ui/react'
+import { Alert, Box, Button, Field, Input } from '@chakra-ui/react'
 import { doc, updateDoc } from 'firebase/firestore'
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'

@@ -1,4 +1,4 @@
-import { Alert, Box, Center, Heading, Spinner, Text, VStack } from '@chakra-ui/react'
+import { Alert, Box, Center, Spinner, VStack } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
 import { userAtom } from '../../../atoms/userAtom'
